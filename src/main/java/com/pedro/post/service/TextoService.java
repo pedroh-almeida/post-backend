@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.pedro.post.model.Texto;
 import com.pedro.post.repository.TextoRepository;
+import com.pedro.post.service.exception.ObjetoNaoEncontrado;
 
 @Service
 public class TextoService {
-	
+
 	@Autowired
 	private TextoRepository repository;
-	
-	
-	public Texto findById (Integer id) {
+
+	public Texto findById(Integer id) {
 		Optional<Texto> texto = repository.findById(id);
-		
-		return texto.orElse(null);
+
+		return texto.orElseThrow(
+				() -> new ObjetoNaoEncontrado("Objeto não encontrado! ID: " + id + ". TIPO: " + Texto.class.getName()));
 	}
 }
