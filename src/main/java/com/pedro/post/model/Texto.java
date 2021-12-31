@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Texto implements Serializable{
 
@@ -22,6 +23,7 @@ public class Texto implements Serializable{
 	private String titulo;
 	private String conteudo;
 
+	
 	@OneToMany(mappedBy = "texto")
 	private List<Voto> votos = new ArrayList<>();
 

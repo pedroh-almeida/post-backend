@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Voto implements Serializable {
 
@@ -21,6 +23,7 @@ public class Voto implements Serializable {
 	private String status;
 	private String comentario;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "texto_id")
 	private Texto texto;
