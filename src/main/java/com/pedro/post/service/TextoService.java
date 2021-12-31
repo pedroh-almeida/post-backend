@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pedro.post.dto.TextoDto;
 import com.pedro.post.model.Texto;
 import com.pedro.post.repository.TextoRepository;
 import com.pedro.post.service.exception.ObjetoNaoEncontrado;
@@ -29,6 +30,14 @@ public class TextoService {
 
 	public Texto create(Texto texto) {
 		texto.setId(null);
+		
+		return repository.save(texto);
+	}
+
+	public Texto update(Integer id, TextoDto textoDto) {
+		Texto texto = findById(id);
+		texto.setConteudo(textoDto.getConteudo());
+		texto.setTitulo(textoDto.getTitulo());
 		
 		return repository.save(texto);
 	}
