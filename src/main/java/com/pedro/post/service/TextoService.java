@@ -26,4 +26,10 @@ public class TextoService {
 	public List<Texto> findAll() {
 		return repository.findAll();
 	}
+
+	public Texto create(Texto texto) {
+		texto.setId(null);
+		
+		return repository.save(texto);
+	}
 }
