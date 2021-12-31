@@ -1,5 +1,6 @@
 package com.pedro.post.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,9 @@ public class TextoService {
 
 		return texto.orElseThrow(
 				() -> new ObjetoNaoEncontrado("Objeto não encontrado! ID: " + id + ". TIPO: " + Texto.class.getName()));
+	}
+	
+	public List<Texto> findAll() {
+		return repository.findAll();
 	}
 }
