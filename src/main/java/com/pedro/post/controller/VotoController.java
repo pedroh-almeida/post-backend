@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import com.pedro.post.dto.VotoDto;
 import com.pedro.post.model.Voto;
 import com.pedro.post.service.VotoService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/votos")
 public class VotoController {
@@ -46,7 +50,7 @@ public class VotoController {
 
 	@PostMapping
 	public ResponseEntity<Voto> create(@RequestParam(value = "texto", defaultValue = "0") Integer id_texto,
-			@RequestBody Voto votoBody) {
+			@Valid @RequestBody Voto votoBody) {
 		Voto voto = service.create(id_texto, votoBody);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/votos/{id}").buildAndExpand(voto.getId()).toUri();

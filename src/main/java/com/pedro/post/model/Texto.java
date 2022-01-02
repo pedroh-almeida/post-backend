@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 
 @Entity
@@ -20,7 +23,13 @@ public class Texto implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotEmpty(message = "Título é obrigatório.")
+	@Length(min = 2, max = 50, message = "Título deve ter entre 2 e 50 caracteres.")
 	private String titulo;
+	
+	@NotEmpty(message = "Conteúdo é obrigatório.")
+	@Length(min = 20, max = 5000, message = "Conteúdo deve ter no mínimo 20.")
 	private String conteudo;
 
 	

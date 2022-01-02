@@ -2,6 +2,10 @@ package com.pedro.post.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.pedro.post.model.Texto;
 
 public class TextoDto implements Serializable {
@@ -9,7 +13,13 @@ public class TextoDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	@NotEmpty(message = "Título é obrigatório.")
+	@Length(min = 2, max = 50, message = "Título deve ter entre 2 e 50 caracteres.")
 	private String titulo;
+	
+	@NotEmpty(message = "Conteúdo é obrigatório.")
+	@Length(min = 20, message = "Conteúdo deve ter no mínimo 20.")
 	private String conteudo;
 
 	public TextoDto() {

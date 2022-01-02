@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import com.pedro.post.dto.TextoDto;
 import com.pedro.post.model.Texto;
 import com.pedro.post.service.TextoService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/textos")
 public class TextoController {
@@ -43,7 +47,7 @@ public class TextoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Texto> create (@RequestBody Texto texto) {
+	public ResponseEntity<Texto> create (@Valid @RequestBody Texto texto) {
 		texto = service.create(texto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(texto.getId()).toUri();
 		
@@ -51,7 +55,7 @@ public class TextoController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<TextoDto> update(@PathVariable Integer id, @RequestBody TextoDto textoDto) {
+	public ResponseEntity<TextoDto> update(@PathVariable Integer id, @Valid @RequestBody TextoDto textoDto) {
 		Texto texto = service.update(id, textoDto);
 		return ResponseEntity.ok().body(new TextoDto(texto));
 	}
