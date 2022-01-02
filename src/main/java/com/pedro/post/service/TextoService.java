@@ -41,4 +41,9 @@ public class TextoService {
 		
 		return repository.save(texto);
 	}
+
+	public void delete(Integer id) {
+		repository.findById(id);
+		repository.deleteById(id);
+	}
 }
