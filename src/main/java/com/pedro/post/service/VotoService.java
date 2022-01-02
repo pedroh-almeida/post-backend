@@ -1,5 +1,6 @@
 package com.pedro.post.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,20 @@ public class VotoService {
 
 	@Autowired
 	private VotoRepository repository;
+	
+	@Autowired
+	private TextoService textoService;
 
 	public Voto findById(Integer id) {
 		Optional<Voto> voto = repository.findById(id);
 
 		return voto.orElseThrow(
 				() -> new ObjetoNaoEncontrado("Objeto não encontrado! ID: " + id + ", TIPO: " + Voto.class.getName()));
+	}
+
+	public List<Voto> findAllByText(Integer id_texto) {
+		textoService.findById(id_texto);
+		
+		return repository.findAllByText(id_texto);
 	}
 }
