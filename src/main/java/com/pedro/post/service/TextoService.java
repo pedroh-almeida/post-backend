@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.pedro.post.dto.TextoDto;
 import com.pedro.post.model.Texto;
 import com.pedro.post.repository.TextoRepository;
 import com.pedro.post.service.exception.ObjetoNaoEncontrado;
+import com.pedro.post.service.exception.ViolacaoDeIntegridade;
 
 @Service
 public class TextoService {
@@ -44,6 +46,10 @@ public class TextoService {
 
 	public void delete(Integer id) {
 		repository.findById(id);
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new ViolacaoDeIntegridade("Texto não pode ser deletado! Existem votos associados.");
+		}
 	}
 }

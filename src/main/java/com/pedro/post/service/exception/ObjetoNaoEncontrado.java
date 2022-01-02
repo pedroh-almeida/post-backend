@@ -12,5 +12,4 @@ public class ObjetoNaoEncontrado extends RuntimeException {
 		super(message);
 	}
 
-	
 }
