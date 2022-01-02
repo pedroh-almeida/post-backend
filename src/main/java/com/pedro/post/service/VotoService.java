@@ -40,6 +40,12 @@ public class VotoService {
 		
 		return repository.save(votoBody);
 	}
+
+	public void delete(Integer id) {
+		Voto voto = this.findById(id);
+		
+		repository.delete(voto);
+	}
 	
 	
 }
