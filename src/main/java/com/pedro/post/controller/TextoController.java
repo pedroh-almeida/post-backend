@@ -25,7 +25,7 @@ import com.pedro.post.service.TextoService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(value = "/textos")
+@RequestMapping(value = "textos")
 public class TextoController {
 
 	@Autowired
